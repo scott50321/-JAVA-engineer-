@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:coindesk;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true          # 瀏覽器開 http://localhost:8080/h2-console 可以看資料
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: none         # 不讓 Hibernate 自動建表，改用自己寫的 schema.sql
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      encoding: UTF-8        # Windows 預設用 cp950 讀 SQL 檔，中文會變亂碼，所以要指定編碼
+
+coindesk:
+  api-url: https://kengp3.github.io/blog/coindesk.json
